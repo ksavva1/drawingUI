@@ -36,5 +36,5 @@ body{
 } 
 #nuke { position:absolute; cursor:pointer; margin-top:-10px; right:100px; }
 #tempCanvas { position: absolute; width:897px; height:532px; overflow:hidden; }
-#saveWrapper { position:absolute; right:0px; } 
+#save { position:absolute; right:0px; } 
 .noscript{ padding:50px 30px 0 40px; width:820px; } 

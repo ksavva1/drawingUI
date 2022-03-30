@@ -112,31 +112,16 @@ if(window.addEventListener){
     init();
 }, false); }
 
-window.onload = function(){ 
-    var bMouseIsDown = false; 
-    var oCanvas = document.getElementById("drawingCanvas"); 
-    var oCtx = oCanvas.getContext("2d"); 
-    var iWidth = oCanvas.width; 
-    var iHeight = oCanvas.height; 
-}
-
 //Save image
 window.onload = function(){ 
     var bMouseIsDown = false; 
     var oCanvas = document.getElementById("drawingCanvas"); 
-    var oCtx = oCanvas.getContext("2d"); 
     var iWidth = oCanvas.width; 
     var iHeight = oCanvas.height; 
 
-    function showDownloadText(){ 
-        document.getElementById("textdownload").style.display = "block"; 
-    }function hideDownloadText(){ 
-        document.getElementById("textdownload").style.display = "none"; 
-    }function convertCanvas(strType){ 
+    function convertCanvas(strType){ 
         if (strType == "PNG") 
             var oImg = Canvas2Image.saveAsPNG(oCanvas, true); 
-        if (strType == "BMP") 
-            var oImg = Canvas2Image.saveAsBMP(oCanvas, true); 
         if (strType == "JPEG") 
             var oImg = Canvas2Image.saveAsJPEG(oCanvas, true); 
         if (!oImg) { 
@@ -146,26 +131,21 @@ window.onload = function(){
         oImg.id = "canvasimage"; 
         oImg.style.border = oCanvas.style.border; 
         oCanvas.parentNode.replaceChild(oImg, oCanvas); 
-        howDownloadText(); 
     } 
-    function saveCanvas(pCanvas, strType){ 
+    function saveCanvas(strType){ 
         var bRes = false; 
         if (strType == "PNG") 
-            bRes = Canvas2Image.saveAsPNG(oCanvas); 
+            bRes = Canvas2Image.saveAsPNG(oCanvas, iWidth, iHeight); 
         if (strType == "BMP") 
-            bRes = Canvas2Image.saveAsBMP(oCanvas); 
+            bRes = Canvas2Image.saveAsBMP(oCanvas, iWidth, iHeight); 
         if (strType == "JPEG") 
-            bRes = Canvas2Image.saveAsJPEG(oCanvas); 
+            bRes = Canvas2Image.saveAsJPEG(oCanvas, iWidth, iHeight); 
         if (!bRes) { 
             alert("Sorry, this browser is not capable of saving " + strType + " files!"); 
         return false; 
         } 
     } 
-    document.getElementById("convertpngbtn").onclick = function(){ 
-        convertCanvas("PNG"); 
-    } 
-    document.getElementById("resetbtn").onclick = function(){ 
-        var oImg = document.getElementById("canvasimage"); 
-        oImg.parentNode.replaceChild(oCanvas, oImg); 
-        hideDownloadText(); 
+    document.getElementById("convertpngbtn").onclick = function(){
+        convertCanvas("PNG");
+        saveCanvas("PNG"); 
     }}
